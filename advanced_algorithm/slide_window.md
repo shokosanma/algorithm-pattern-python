@@ -215,3 +215,28 @@ class Solution:
 - [ ] [permutation-in-string](https://leetcode-cn.com/problems/permutation-in-string/)
 - [ ] [find-all-anagrams-in-a-string](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/)
 - [ ] [longest-substring-without-repeating-characters](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
+
+## 相似题目追加
+
+[滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/)
+
+```
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        import collections
+        q = collections.deque()
+        for i in range(k):
+            while q and nums[i] >= nums[q[-1]]:
+                q.pop()
+            q.append(i)
+        res = [nums[q[0]]]
+        for i in range(k, len(nums)):
+            while q and nums[i] >= nums[q[-1]]:
+                q.pop()
+            q.append(i)
+            if q[0] <= i-k:
+                q.popleft()
+            res.append(nums[q[0]])
+        return res
+```
+
